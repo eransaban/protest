@@ -15,7 +15,7 @@ sudo chmod 766 /var/run/docker.sock
 CONSUL_VERSION="1.6.2"
 ### set Node Exporter Version
 PROMETHEUS_DIR="/opt/prometheus"
-NODE_EXPORTER_VERSION-"0.18.1"
+NODE_EXPORTER_VERSION="0.18.1"
 
 echo "Grabbing IPs..."
 PRIVATE_IP=$(curl http://169.254.169.254/latest/meta-data/local-ipv4)

@@ -25,7 +25,7 @@ scrape_configs:
         separator: ':'
         regex: '(.*):(.*)'
         target_label: '__address__'
-        replacement: '\\$1:9100'
+        replacement: '$1:9100'
   - job_name: 'consul-service'
     consul_sd_configs:
       - server: 'localhost:8500'
@@ -41,7 +41,7 @@ scrape_configs:
         separator: ';'
         regex: '(.*):(.*)'
         target_label: '__address__'
-        replacement: '\\$1:8500'
+        replacement: '$1:8500'
 EOF
 
 # Configure promcol service
@@ -64,27 +64,6 @@ EOF
 systemctl daemon-reload
 systemctl enable promcol.service
 systemctl start promcol.service
-
-### add promcol service to consul
-tee /etc/consul.d/promcol-9090.json > /dev/null <<"EOF"
-{
-  "service": {
-    "id": "promcol-9090",
-    "name": "promcol",
-    "tags": ["promcol"],
-    "port": 9090,
-    "checks": [
-      {
-        "id": "tcp",
-        "name": "TCP on port 9090",
-        "tcp": "localhost:9090",
-        "interval": "10s",
-        "timeout": "1s"
-      }
-    ]
-  }
-}
-EOF
 
 # #sleep 30
 # sudo apt-get update -y

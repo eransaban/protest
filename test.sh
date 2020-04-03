@@ -152,6 +152,7 @@ tee /etc/consul.d/config.json > /dev/null <<EOF
   }
 EOF
 
+
 # Create user & grant ownership of folders
 useradd consul
 chown -R consul:consul /opt/consul /etc/consul.d /run/consul
@@ -181,17 +182,38 @@ WantedBy=multi-user.target
 EOF
 
 
-#configure service and health check 
-echo '{"service":
-  {"name": "Prometheus",
-    "tags": ["Prometheus"],
+# #configure service and health check 
+# echo '{"service":
+#   {"name": "Prometheus",
+#     "tags": ["Prometheus"],
+#     "port": 9090,
+#     "check": {
+#       "args": ["curl", "localhost:9090"],
+#       "interval": "10s"
+#     }
+#   }
+# }' > /etc/consul.d/Prometheus.json
+
+### add promcol service to consul
+tee /etc/consul.d/promcol-9090.json > /dev/null <<"EOF"
+{
+  "service": {
+    "id": "promcol-9090",
+    "name": "promcol",
+    "tags": ["promcol"],
     "port": 9090,
-    "check": {
-      "args": ["curl", "localhost:9090"],
-      "interval": "10s"
-    }
+    "checks": [
+      {
+        "id": "tcp",
+        "name": "TCP on port 9090",
+        "tcp": "localhost:9090",
+        "interval": "10s",
+        "timeout": "1s"
+      }
+    ]
   }
-}' > /etc/consul.d/Prometheus.json
+}
+EOF
 
 
 

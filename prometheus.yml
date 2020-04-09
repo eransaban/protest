@@ -27,3 +27,10 @@ scrape_configs:
         regex: '(.*):(.*)'
         target_label: '__address__'
         replacement: '$1:8500'
+- job_name: 'jenkins'
+    metrics_path: '/prometheus/'
+    scheme: http
+    bearer_token: <bearer_token>
+    static_configs:
+        - targets: ['jenkins-webserver.service.consul:8080']
+

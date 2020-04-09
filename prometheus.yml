@@ -1,0 +1,29 @@
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+    - targets: ['localhost:9090']
+  - job_name: 'Node Exporter'
+    consul_sd_configs:
+      - server: 'localhost:8500'
+    relabel_configs:
+      - source_labels: ['__address__']
+        separator: ':'
+        regex: '(.*):(.*)'
+        target_label: '__address__'
+        replacement: '$1:9100'
+  - job_name: 'consul-service'
+    consul_sd_configs:
+      - server: 'localhost:8500'
+    metrics_path: '/v1/agent/metrics'
+    params:
+      format: ['prometheus']
+    relabel_configs:
+      - source_labels: ['__meta_consul_service']
+        regex: '(^consul)'
+        target_label: job
+        action: 'keep'
+      - source_labels: ['__address__']
+        separator: ';'
+        regex: '(.*):(.*)'
+        target_label: '__address__'
+        replacement: '$1:8500'

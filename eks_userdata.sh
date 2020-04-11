@@ -11,23 +11,27 @@ echo "Grabbing IPs..."
 PRIVATE_IP=$(curl http://169.254.169.254/latest/meta-data/local-ipv4)
 
 echo "Installing dependencies..."
-yum -qq update &>/dev/null
-yum -yqq install unzip dnsmasq &>/dev/null
+yum update -qq &>/dev/null
+yum install unzip dnsmasq -yqq &>/dev/null
 
 echo "Configuring dnsmasq..."
 cat << EODMCF >/etc/dnsmasq.d/10-consul
 # Enable forward lookup of the 'consul' domain:
 server=/consul/127.0.0.1#8600
 EODMCF
-echo "Change Systemd-Resolved to Allow Ping and host"
-cat << EODMCF >>/etc/systemd/resolved.conf
-# Enable Systemd-Resolved find local domains:
-DNS=127.0.0.1
-Domains=~consul
-EODMCF
+# echo "Change Systemd-Resolved to Allow Ping and host"
+# cat << EODMCF >>/etc/systemd/resolved.conf
+# # Enable Systemd-Resolved find local domains:
+# DNS=127.0.0.1
+# Domains=~consul
+# EODMCF
+
+#Echo localdns to resolve.conf (centos\amazon linux)
+echo "prepend domain-name-servers 127.0.0.1;" >> "/etc/dhcp/dhclient.conf"
 
 systemctl restart dnsmasq
-systemctl restart systemd-resolved
+systemctl restart network
+#systemctl restart systemd-resolved
 
 echo "Fetching Consul..."
 cd /tmp

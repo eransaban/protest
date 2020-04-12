@@ -11,7 +11,7 @@ echo "Grabbing IPs..."
 PRIVATE_IP=$(curl http://169.254.169.254/latest/meta-data/local-ipv4)
 
 echo "Installing dependencies..."
-yum update -qq &>/dev/null
+yum update -yqq &>/dev/null
 yum install unzip dnsmasq -yqq &>/dev/null
 
 echo "Configuring dnsmasq..."

@@ -36,4 +36,17 @@ scrape_configs:
     bearer_token: <bearer_token>
     static_configs:
         - targets: ['jenkins-webserver.service.consul:8080']
+  - job_name: 'Mysql Exporter'
+    consul_sd_configs:
+      - server: 'localhost:8500'
+    relabel_configs:
+      - source_labels: ['__meta_consul_service']
+        regex: '(^mysql)'
+        target_label: job
+      - source_labels: ['__address__']
+        separator: ':'
+        regex: '(.*):(.*)'
+        target_label: '__address__'
+        replacement: '$1:9104'
+ 
 

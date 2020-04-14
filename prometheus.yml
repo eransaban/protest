@@ -40,9 +40,10 @@ scrape_configs:
     consul_sd_configs:
       - server: 'localhost:8500'
     relabel_configs:
-      - source_labels: ['__meta_consul_service']
-        regex: '(^mysql)'
+      - source_labels: ['__meta_consul_tags']
+        regex: '.*,mysql,.*'
         target_label: job
+        action: 'keep'
       - source_labels: ['__address__']
         separator: ':'
         regex: '(.*):(.*)'

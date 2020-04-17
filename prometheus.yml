@@ -9,6 +9,9 @@ scrape_configs:
       - source_labels: ['__meta_consul_service']
         regex: '(.*)'
         target_label: service
+      - source_labels: ['__meta_consul_tags']
+        regex: '.*,k8s,.*'
+        action: drop
       - source_labels: ['__address__']
         separator: ':'
         regex: '(.*):(.*)'

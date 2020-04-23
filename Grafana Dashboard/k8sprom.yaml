@@ -16,7 +16,7 @@ datasources:
   # <string, required> access mode. direct or proxy. Required
   access: proxy
   # <int> org id. will default to orgId 1 if not specified
-  orgId: 2
+  orgId: 1
   # <string> url
   url: http://prom-prometheus-server-default.service.consul:80
   # <string> database password, if used

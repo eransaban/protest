@@ -13,4 +13,4 @@ notifiers:
     # See `Supported Settings` section for settings supporter for each
     # alert notification type.
     settings:
-      url: https://hooks.slack.com/services/
+      url: https://hooks.slack.com/services/changeme

@@ -2560,7 +2560,7 @@
         "multi": false,
         "name": "datasource",
         "options": [],
-        "query": "prometheus",
+        "query": "prometheus-EKS",
         "refresh": 1,
         "regex": "/$ds/",
         "skipUrlSync": false,

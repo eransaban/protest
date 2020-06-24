@@ -87,23 +87,23 @@ def main():
             print 'Credit Card Number Is Valid'
             credit = []
             main()
-    except CreditCardNot16, err1:
+    except CreditCardNot16 as err1:
         print err1
         credit = []
         main()
-    except StartWithDigits, err2:
+    except StartWithDigits as err2:
         print err2
         credit = []
         main()
-    except OnlyDigits, err3:
+    except OnlyDigits as err3:
         print err3
         credit = []
         main()
-    except SymbolsUsed, err4:
+    except SymbolsUsed as err4:
         print err4
         credit = []
         main()
-    except Consecutive, err5:
+    except Consecutive as err5:
         print err5
         credit = []
         main()

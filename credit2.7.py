@@ -3,7 +3,7 @@ import string
 symbols = string.punctuation  #create a varible with multiple symbols
 credit = [] #create an empty list for id checks
 
-u"""Classes to catch Specific Errors"""
+"""Classes to catch Specific Errors"""
 class CreditCardNot16(Exception):
     def __init__(self):
         pass
@@ -16,30 +16,30 @@ class StartWithDigits(Exception):
         pass
 
     def __str__(self):
-        return u"Invalid - Credit Card Must Start With Either 4, 5 or 6"
+        return "Invalid - Credit Card Must Start With Either 4, 5 or 6"
 
 class OnlyDigits(Exception):
     def __init__(self):
         pass
 
     def __str__(self):
-        return u"Invalid - Credit Card Must is Digits 0-9 ONLY!"
+        return "Invalid - Credit Card Must is Digits 0-9 ONLY!"
 
 class SymbolsUsed(Exception):
     def __init__(self):
         pass
 
     def __str__(self):
-        return u"Invalid - Don't Use any Symbols when typing Credit Card Number"
+        return "Invalid - Don't Use any Symbols when typing Credit Card Number"
 
 class Consecutive(Exception):
     def __init__(self):
         pass
     def __str__(self):
-        return u"Invalid - 4 Or more Consecutive Repeated Digits Are Not Allowed "
+        return "Invalid - 4 Or more Consecutive Repeated Digits Are Not Allowed "
 
 def check_hypens(card):
-    u"""Strip Hypens and store digits for test in credit"""
+    """Strip Hypens and store digits for test in credit"""
     global credit
     for i in card:
         if i == u"-":
@@ -49,7 +49,7 @@ def check_hypens(card):
     return credit
 
 def check_credit(arg):
-    u"""Run Tests and raise specific error"""
+    """Run Tests and raise specific error"""
     global symbols  #imports symbols list
     id = True  #set id value as True
     if len(arg) != 16: #check if number is equal to 16
@@ -80,37 +80,37 @@ def main():
     u""" Ask for a credit card number and runs check
     first of all strip hypens and then run test on the remaining digits and raise appropriate error """
     global credit
-    creditcard = raw_input(u"Hi Please enter your Credit Card Number:")
+    creditcard = raw_input("Hi Please enter your Credit Card Number:")
     try:
         check_hypens(creditcard)
         if check_credit(credit) == True:
-            print u"Credit Card Number Is Valid"
+            print 'Credit Card Number Is Valid'
             credit = []
             main()
-    except CreditCardNot16, err1:
-        print err1
-        credit = []
-        main()
-    except StartWithDigits, err2:
-        print err2
-        credit = []
-        main()
-    except OnlyDigits, err3:
-        print err3
-        credit = []
-        main()
-    except SymbolsUsed, err4:
-        print err4
-        credit = []
-        main()
-    except Consecutive, err5:
-        print err5
-        credit = []
-        main()
+    # except CreditCardNot16, err1:
+    #     print err1
+    #     credit = []
+    #     main()
+    # except StartWithDigits, err2:
+    #     print err2
+    #     credit = []
+    #     main()
+    # except OnlyDigits, err3:
+    #     print err3
+    #     credit = []
+    #     main()
+    # except SymbolsUsed, err4:
+    #     print err4
+    #     credit = []
+    #     main()
+    # except Consecutive, err5:
+    #     print err5
+    #     credit = []
+    #     main()
     except:
-        print u"Invalid Please Try again"
+        print 'Invalid Please Try again'
         credit = []
         main()
 
-if __name__ == u"__main__":
+if __name__ == "__main__":
     main()

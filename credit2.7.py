@@ -9,7 +9,7 @@ class CreditCardNot16(Exception):
         pass
 
     def __str__(self):
-        return u"Invalid - Credit Card Must Be 16 Digits"
+        return "Invalid - Credit Card Must Be 16 Digits"
 
 class StartWithDigits(Exception):
     def __init__(self):
@@ -87,28 +87,28 @@ def main():
             print 'Credit Card Number Is Valid'
             credit = []
             main()
-    # except CreditCardNot16, err1:
-    #     print err1
-    #     credit = []
-    #     main()
-    # except StartWithDigits, err2:
-    #     print err2
-    #     credit = []
-    #     main()
-    # except OnlyDigits, err3:
-    #     print err3
-    #     credit = []
-    #     main()
-    # except SymbolsUsed, err4:
-    #     print err4
-    #     credit = []
-    #     main()
-    # except Consecutive, err5:
-    #     print err5
-    #     credit = []
-    #     main()
+    except CreditCardNot16, err1:
+        print err1
+        credit = []
+        main()
+    except StartWithDigits, err2:
+        print err2
+        credit = []
+        main()
+    except OnlyDigits, err3:
+        print err3
+        credit = []
+        main()
+    except SymbolsUsed, err4:
+        print err4
+        credit = []
+        main()
+    except Consecutive, err5:
+        print err5
+        credit = []
+        main()
     except:
-        print 'Invalid Please Try again'
+        print "Invalid Please Try again"
         credit = []
         main()
 

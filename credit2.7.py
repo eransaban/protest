@@ -1,9 +1,9 @@
+from __future__ import absolute_import
 import string
 symbols = string.punctuation  #create a varible with multiple symbols
 credit = [] #create an empty list for id checks
 
 u"""Classes to catch Specific Errors"""
-from __future__ import absolute_import
 class CreditCardNot16(Exception):
     def __init__(self):
         pass
